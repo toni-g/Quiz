@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <title>Wie gut kennst du das Heisenberg-Gymnasium?</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="harry.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="leisteErstellen()">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <header>
+          <img src="Logo1.jpg" height="125px">
+          <h3>Das Heisenberg-Blatt</h3>
+        </header>
+        <div id="rand" class="container-fragen">
+          <h2 id="ueberschrift">Frage1?</h2>
+          <div id="leiste" class="d-flex justify-content-center">
+            
+          </div>
+          <div class="d-flex justify-content-center">
+            <p id="punktzahl" class="punktzahl"></p>
+            <p id="von"></p>
+            <p id="gesamt"></p>
+          </div>
+          <h2 id="ueberschrift2"></h2>
+          <p id="gesucht"></p>
+          <p id="gruen"></p>
+          <p id="wahr"></p>
+          <div class="klicka">
+          </div>
+          <div id="buttons" class="d-flex justify-content-center">
+            <div  class="btn-group mr-2">
+              <button id="richtig" class="btn btn-primary">a1</button>
+            </div>
+            <div class="btn-group mr-2">
+              <button id="falsch1" class="btn btn-primary">a2</button>
+            </div>
+            <div class="btn-group mr-2">
+              <button id="falsch2" class="btn btn-primary">a3</button>
+            </div>
+            <div class="btn-group mr-2">
+              <button id="falsch3" class="btn btn-primary">a4</button>
+            </div>
+            
+          </div>
+          <script>
+            var richtigeAntworten = 0;
+            var fr1 = ["a1","a2","a3","a4"];
+            var fr2 = ["a1","a2","a3","a4"];
+            var fr3 = ["a1","a2","a3","a4"];
+            var fr4 = ["a1","a2","a3","a4"];
+            var fr5 = ["a1","a2","a3","a4"];
+
+            var antwortmoeglichkeiten = 
+            [fr1,fr2,fr3,fr4,fr5];
+
+            var welchemoeglichkeit = 0;
+            var i = 0;
+
+            var fragen = [
+            "Frage1?",
+            "Frage2?",
+            "Frage3?",
+            "Frage4?",
+            "Frage5?"
+            ];
+
+            document.getElementById("richtig").addEventListener("click",wahr);
+            document.getElementById("falsch1").addEventListener("click",falsch);
+            document.getElementById("falsch2").addEventListener("click",falsch);
+            document.getElementById("falsch3").addEventListener("click",falsch);
+
+            function wahr (){
+              gruenerPunkt();
+              plusEins();
+              aendereUeberschrift();
+              naechseSeite();
+              iPlusEins();
+            }
+
+            function falsch (){
+              roterPunkt();
+              aendereUeberschriftF();
+              naechseSeite();
+              iPlusEins();
+            }
+
+            function iPlusEins(){
+              i+=1;
+            }
+
+            function plusEins(){
+              richtigeAntworten += 1;
+        //document.getElementById("punktzahl").innerText = richtigeAntworten;
+      }
+
+      function leisteErstellen(){
+        var div = document.getElementById("leiste");
+        for (var i = 1; i <= antwortmoeglichkeiten.length; i++) {
+          this["div"+i] = document.createElement("div");
+          this["div"+i].setAttribute("class","kreise");
+          this["p"+i] = document.createElement("span");
+          this["p"+i].setAttribute("class","far fa-circle");
+          this["p"+i].setAttribute("id","p"+i);
+          this["div"+i].appendChild(this["p"+i]);
+          div.appendChild(this["div"+i]);
+        }
+      }
+
+      function gruenerPunkt(){
+        var kreisOben ="p"+(i+1);
+        var grueneFuellung = document.getElementById(kreisOben);
+        grueneFuellung.setAttribute("class","fas fa-circle");
+        grueneFuellung.style.color="green";
+      }
+
+      function roterPunkt(){
+        var kreisOben = "p"+(i+1);
+        var roteFuellung = document.getElementById(kreisOben);
+        roteFuellung.setAttribute("class","fas fa-circle");
+        roteFuellung.style.color="red";
+      }
+
+      function nächsteFrage(){
+
+        welchemoeglichkeit += 1;
+        
+        //was sind die nächsten Antwortmöglichkeiten?
+        var next = antwortmoeglichkeiten[welchemoeglichkeit];
+        
+
+        //erzeuge ein neuen Button mit der richtigen Antwortmöglichkeit
+        var richtig = document.createElement("BUTTON");
+        var text = document.createTextNode(next[0]);
+        richtig.appendChild(text);
+
+        // id = richtig, class = richtige Antwortmöglichkeit
+        richtig.setAttribute("id", "richtig");
+        richtig.setAttribute("class", "btn btn-primary");
+
+
+        var falsch1 = document.createElement("BUTTON");
+        var text = document.createTextNode(next[1]);
+        falsch1.appendChild(text);
+        falsch1.setAttribute("id", "falsch1");
+        falsch1.setAttribute("class", "btn btn-primary");
+
+        var falsch2 = document.createElement("BUTTON");
+        var text = document.createTextNode(next[2]);
+        falsch2.appendChild(text);
+        falsch2.setAttribute("id", "falsch2");
+        falsch2.setAttribute("class", "btn btn-primary");
+
+        var falsch3 = document.createElement("BUTTON");
+        var text = document.createTextNode(next[3]);
+        falsch3.appendChild(text);
+        falsch3.setAttribute("id", "falsch3");
+        falsch3.setAttribute("class", "btn btn-primary");
+
+        // erzeuge ein div mit der id = buttons in dem sich die Buttons befinden
+        var div = document.createElement("div");
+        div.setAttribute("id", "buttons");
+        div.setAttribute("class", "d-flex justify-content-center");
+
+        var btn1 = document.createElement("div");
+        var btn2 = document.createElement("div");
+        var btn3 = document.createElement("div");
+        var btn4 = document.createElement("div");
+        btn1.setAttribute("class", "btn-group mr-2");
+        btn2.setAttribute("class", "btn-group mr-2");
+        btn3.setAttribute("class", "btn-group mr-2");
+        btn4.setAttribute("class", "btn-group mr-2");
+
+        btn1.appendChild(richtig);
+        btn2.appendChild(falsch1);
+        btn3.appendChild(falsch2);
+        btn4.appendChild(falsch3);
+
+        var btnArray = [btn1,btn2,btn3,btn4];
+
+        var laenge = btnArray.length;
+        var index, temp;
+
+        while (laenge>0){
+          index = Math.floor(Math.random()*laenge);
+          laenge--;
+
+          temp = btnArray[laenge];
+          btnArray[laenge]=btnArray[index];
+          btnArray[index]=temp;
+        }
+
+        div.appendChild(btnArray[0]);
+        div.appendChild(btnArray[1]);
+        div.appendChild(btnArray[2]);
+        div.appendChild(btnArray[3]);
+
+
+        //
+        var item = document.getElementById("weiterDiv");
+
+        item.parentNode.replaceChild(div, item);
+
+        document.getElementById("richtig").addEventListener("click",wahr);
+        document.getElementById("falsch1").addEventListener("click",falsch);
+        document.getElementById("falsch2").addEventListener("click",falsch);
+        document.getElementById("falsch3").addEventListener("click",falsch);
+
+      }
+
+
+      function aendereUeberschriftF(){
+        var text = "FALSCH!";
+        document.getElementById("rand").style.borderColor = "red";
+        var f = document.getElementById("ueberschrift");
+        f.innerText = text;
+        f.style.color = "red";
+        f.style.textAlign = "center";
+      }
+
+      function aendereUeberschrift(){
+        var text = "RICHTIG!";
+        document.getElementById("rand").style.borderColor = "green";
+        var r = document.getElementById("ueberschrift")
+        r.innerText = text;
+        r.style.color = "green";
+        r.style.textAlign = "center";
+      }
+
+      function aendereFarbeRück(){
+        document.getElementById("rand").style.borderColor = "#402342";
+        document.getElementById("ueberschrift").style.color = "black";
+        var text = fragen[i];
+        document.getElementById("ueberschrift").innerText = text;
+      }
+
+      function naechseSeite(){
+        if (i<antwortmoeglichkeiten.length-1){
+          weiterButton();
+        } else if(i==antwortmoeglichkeiten.length-1){
+          auswertung();
+        }
+      }
+
+      function weiterButton(){
+        var item = document.getElementById("buttons");
+        var weiter = document.createElement("BUTTON");
+        var text = document.createTextNode("Weiter");
+        var div = document.createElement("div");
+        div.setAttribute("class","klicka");
+        div.setAttribute("id","weiterDiv");
+        div.appendChild(weiter);
+        weiter.appendChild(text);
+        weiter.setAttribute("id", "weiter");
+        weiter.setAttribute("class", "btn btn-primary");
+        item.parentNode.replaceChild(div, item);
+        document.getElementById("weiter").style.textAlign="center";
+        document.getElementById("weiter").addEventListener("click",aendereFarbeRück);
+        document.getElementById("weiter").addEventListener("click",nächsteFrage);
+      }
+
+      function auswertung (){
+        var item = document.getElementById("buttons");
+        var auswertung = document.createElement("BUTTON");
+        var text = document.createTextNode("Auswertung");
+        var div = document.createElement("div");
+        div.setAttribute("class","klicka");
+        div.setAttribute("id","weiterAus");
+        div.appendChild(auswertung);
+        auswertung.appendChild(text);
+        auswertung.setAttribute("id", "auswertung");
+        auswertung.setAttribute("class", "btn btn-primary klicka");
+        item.parentNode.replaceChild(div, item);
+        document.getElementById("auswertung").style.textAlign="center";
+        document.getElementById("auswertung").addEventListener("click",ende);
+      }
+
+      function ende(){
+        punkte();
+        aendereFarbeRück();
+        neuerText();
+        nochmalZurueck();
+      }
+
+      function punkte(){
+        var p = document.getElementById("punktzahl");
+        p.innerText=richtigeAntworten;
+        p.style.fontSize = "xx-large";
+        p.style.textAlign ="center";
+        var v = document.getElementById("von");
+        v.innerText=" von ";
+        v.style.fontSize = "xx-large";
+        v.style.textAlign ="center";
+        v.style.paddingRight ="10px";
+        v.style.paddingLeft ="10px";
+        var g = document.getElementById("gesamt");
+        g.innerText= antwortmoeglichkeiten.length;
+        g.style.fontSize = "xx-large";
+        g.style.textAlign ="center";
+      }
+
+      function neuerText(){
+        var text = "Du hast";
+        document.getElementById("ueberschrift").innerText = text;
+        if (antwortmoeglichkeiten.length==1) {
+          var text2 = "Punkt erreicht!";
+        }else {
+          var text2 = "Punkten erreicht!";
+        }
+        document.getElementById("ueberschrift2").innerText = text2;
+      }
+
+      function nochmalZurueck(){
+        var item = document.getElementById("auswertung");
+        var nochmal = document.createElement("BUTTON");
+        var text = document.createTextNode("Nochmal");
+        nochmal.appendChild(text);
+        nochmal.setAttribute("id", "nochmal");
+        nochmal.setAttribute("class", "btn btn-primary");
+
+        var zurueck = document.createElement("BUTTON");
+        var text = document.createTextNode("Zurück zum Blog");
+        zurueck.appendChild(text);
+        zurueck.setAttribute("id", "zurueck");
+        zurueck.setAttribute("class", "btn btn-primary");
+
+        var div = document.createElement("div");
+        var div1 = document.createElement("div");
+        var div2 = document.createElement("div");
+        div1.setAttribute("class", "klicka");
+        div2.setAttribute("class", "klicka");
+        div1.appendChild(nochmal);
+        div2.appendChild(zurueck);
+        div.appendChild(div1);
+        div.appendChild(div2);
+        item.parentNode.replaceChild(div, item);
+
+        document.getElementById("nochmal").addEventListener("click",index);
+        document.getElementById("zurueck").addEventListener("click",blog);
+      }
+
+      function index() {
+        location.replace("index.html")
+      }
+
+      function blog() {
+        location.replace("https://heisenberg-blatt-hgh.com/")
+      }
+
+    </script>
+  </div>
+</div>
+      <div class="col-sm-3"></div>
+    </div>
+  </div>
+</body>
+</html>

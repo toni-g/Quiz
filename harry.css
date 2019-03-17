@@ -1,0 +1,69 @@
+img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom:  20px;
+}
+
+body {
+	min-height: 100%;
+}
+
+header {
+	text-align: center;
+	font-family: serif; 
+}
+
+
+h2 {
+	text-align: center;
+}
+
+.container-fluid {
+	min-height: 100%;
+}
+
+.container-fragen {
+	vertical-align: center;
+	padding-top: 15px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 15px;
+	border: 1px solid;
+	border-color: #402342;
+	border-radius: 8px;
+}
+
+.col{
+	background-color: #402342;
+	min-height: 100%;
+	margin-bottom: -999px;
+	padding-bottom: 999px;
+}
+
+
+.col-mitte {
+	vertical-align: center;
+	padding-top: 15px;
+	padding-left: 30px;
+	padding-right: 30px;
+	width: 1200px;
+}
+
+.custom-control.custom-radio {
+	padding: 5px;
+}
+
+.klicka {
+	padding: 10px;
+	text-align: center;
+}
+
+.kreise {
+	padding: 5px;
+	text-align: center;
+}
+
+.klickdrum {
+	float: left;
+}
